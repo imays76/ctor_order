@@ -13,7 +13,7 @@ public:
     }
 	~A()
 	{
-		cout << "A.ctor!\n";
+		cout << "A.dtor!\n";
 	}
 };
 
@@ -22,22 +22,31 @@ class B
 public:
     const A& m_a;
     
+	B(const A& a) :m_a(a)
+	{
+		cout << "B.ctor(2)!\n";
+	}
+
 	~B()
 	{
 		cout << "B.dtor!\n";
 	}
 
-    B(const A& a):m_a(a)
-    {
-        cout << "B.ctor(2)!\n";
-    }
+
 };
 
 int main()
 {
     std::cout << "Hello World!\n";
 
-    B b(123);
+	{
+		A a1(123);
+		B b1(a1);
+	}
+	cout << "-------------\n";
+	{
+		B b(123);
+	}
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
